@@ -17,5 +17,11 @@ public class Main{
 
     public static void main(String[] args) {
         App.run();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+
+            }
+        }, "Shutdown-thread"));
     }
 }

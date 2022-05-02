@@ -24,6 +24,10 @@ public class DB {
         return "";
     }
 
+    /**
+     *  get all the campers
+     * @return
+     */
     public static ArrayList getCampers(){
 
         ArrayList campers = new ArrayList();
@@ -47,7 +51,7 @@ public class DB {
 
 }
 
-class connection {
+class DBConnection {
 
     private static Connection con;
 
@@ -65,33 +69,15 @@ class connection {
     }
 
     /**
-     *  Close the instance connection
-     */
-    public static void closeInstance(){
-        disconnect();
-    }
-
-    /**
      *  establishes the connection to the database of the Animal Shelter
      */
     private static void connect() {
         try {
+            System.out.println("Connecting "+con.getCatalog());
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=DB_Bike","Patrick","123456");
-            //System.out.println("Connected to "+con.getCatalog());
+            System.out.println("Connected to "+con.getCatalog());
         } catch (SQLException | ClassNotFoundException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    /**
-     * disconnects from the database
-     */
-    private static void disconnect() {
-        try {
-            //System.out.println("Disconnected from "+con.getCatalog());
-            con.close();
-        } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
     }
