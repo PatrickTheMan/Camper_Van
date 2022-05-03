@@ -13,6 +13,15 @@ import java.util.ArrayList;
 
 public class Scenehandler {
 
+    private static Customer selectedCustomer = null;
+
+    // Needs TO BE FIXED
+    private static Label nameLabel;
+    private static Label phoneNumLabel;
+    private static Label addressLabel;
+    private static Label eMailLabel;
+
+
     private static Scenehandler scenehandler;
 
     /**
@@ -61,11 +70,6 @@ public class Scenehandler {
 
         App.setScene(root);
     }
-
-    private static Label nameLabel;
-    private static Label phoneNumLabel;
-    private static Label addressLabel;
-    private static Label eMailLabel;
 
     private static Parent getCustomerNodeSetup(int width){
 
@@ -137,7 +141,11 @@ public class Scenehandler {
         phoneNumField.setPromptText("PhoneNumber");
         phoneNumField.setAlignment(Pos.CENTER);
 
+        // Search for the customers number
         Controller.searchPhoneNumber(CustomerList.getInstance().getCustomers(),phoneNumField);
+
+        // Set the selected customer
+        selectedCustomer = customer;
 
 
         VBox infoBox = new VBox();
@@ -316,7 +324,7 @@ public class Scenehandler {
         }
 
         // Add function to the button
-        Controller.createNewReservation(standardButton,phoneNumLabel.getText(),camper.getLicensePlate(),""+numberOnWeek);
+        Controller.createNewReservation(standardButton,selectedCustomer,camper,""+numberOnWeek);
 
         return standardButton;
     }
