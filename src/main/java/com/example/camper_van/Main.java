@@ -1,12 +1,14 @@
 package com.example.camper_van;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main{
 
@@ -16,12 +18,11 @@ public class Main{
      */
 
     public static void main(String[] args) {
+
+        CustomerList.getInstance().getCustomers().get(0).getReservations().get(0);
+
         App.run();
 
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            public void run() {
 
-            }
-        }, "Shutdown-thread"));
     }
 }

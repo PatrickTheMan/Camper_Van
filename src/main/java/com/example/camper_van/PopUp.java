@@ -8,14 +8,14 @@ import javafx.util.Duration;
 
 public class PopUp {
 
-    public void popText(String text, String color, String size, Stage stage) {
+    public static void popText(String text, String color, String size, Stage stage) {
         try {
             Popup popup = new Popup();
             popup.setAutoHide(true);
             popup.setAutoFix(true);
             Label popupLabel = new Label(text);
-            popupLabel.setStyle("-fx-background-color:white;"
-                    + " -fx-text-fill: " + color + ";"
+            popupLabel.setStyle("-fx-background-color: "+color+";"
+                    + " -fx-text-fill: Black;"
                     + " -fx-font-size: " + size + ";"
                     + " -fx-padding: 10px;"
                     + " -fx-background-radius: 6;");
