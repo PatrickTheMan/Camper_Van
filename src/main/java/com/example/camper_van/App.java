@@ -5,6 +5,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,8 +18,8 @@ public class App extends Application {
 
     public static Stage stage;
 
-    public static double minWidth = 1350;
-    public static double minHeight = 700;
+    public static final double minWidth = 1350;
+    public static final double minHeight = 700;
 
     public static void run(){
         launch();
@@ -99,15 +103,56 @@ class Controller {
         return textField;
     }
 
-    public static Button createNewReservation(Button button){
+    public static Button createNewReservation(Button button,String phoneNum, String licensePlate, String weekStart){
 
         button.setOnAction(actionEvent -> {
 
+            if (!phoneNum.equals("PhoneNum: None")){
+                System.out.println(phoneNum+" / "+licensePlate+" / "+weekStart);
+                //makeReservationStage(phoneNum,licensePlate,weekStart);
+            }
 
 
         });
 
         return button;
+    }
+
+    private static Stage makeReservationStage(String phoneNum, String licensePlate, String weekStart){
+
+        final double dialogWidth = 450;
+        final double dialogHeight = 450;
+
+
+        Stage dialog = new Stage();
+
+        dialog.setResizable(false);
+        dialog.setTitle("New booking");
+
+        VBox vBoxDialog = new VBox(5);
+
+        Scene dialogScene = new Scene(vBoxDialog, dialogWidth, dialogHeight);
+
+        // Disables the option to use main window when dialog is active
+        dialog.initModality(Modality.APPLICATION_MODAL);
+
+
+        // Add BorderPane
+        BorderPane borderPane = new BorderPane();
+        VBox.setVgrow(borderPane, Priority.ALWAYS);
+        vBoxDialog.getChildren().add(borderPane);
+
+
+
+
+
+
+
+
+
+
+
+        return dialog;
     }
 
 }

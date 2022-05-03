@@ -39,9 +39,6 @@ public class Scenehandler {
         VBox rightSide = new VBox();
         rightSide.setMinWidth(350);
 
-        // Set the top of the border bane to the search function setup
-        leftSide.getChildren().addAll(getOverviewList(10,Fleet.getInstance().getCampers()));
-
         if (customer == null){
             // Set the right side of the screen
             rightSide.getChildren().addAll(getCustomerNodeSetup(350));
@@ -50,6 +47,8 @@ public class Scenehandler {
             rightSide.getChildren().addAll(getCustomerNodeSetup(350,customer));
         }
 
+        // Set the top of the border bane to the search function setup
+        leftSide.getChildren().addAll(getOverviewList(10,Fleet.getInstance().getCampers()));
 
 
         // Add the sides
@@ -62,6 +61,11 @@ public class Scenehandler {
 
         App.setScene(root);
     }
+
+    private static Label nameLabel;
+    private static Label phoneNumLabel;
+    private static Label addressLabel;
+    private static Label eMailLabel;
 
     private static Parent getCustomerNodeSetup(int width){
 
@@ -83,19 +87,19 @@ public class Scenehandler {
         VBox infoBox = new VBox();
         infoBox.setAlignment(Pos.CENTER);
 
-        Label nameLabel = new Label();
+        nameLabel = new Label();
         nameLabel.setText("Name: None");
         nameLabel.setStyle("-fx-font-size: 20");
 
-        Label phoneNumLabel = new Label();
+        phoneNumLabel = new Label();
         phoneNumLabel.setText("PhoneNum: None");
         phoneNumLabel.setStyle("-fx-font-size: 20");
 
-        Label addressLabel = new Label();
+        addressLabel = new Label();
         addressLabel.setText("Address: None");
         addressLabel.setStyle("-fx-font-size: 20");
 
-        Label eMailLabel = new Label();
+        eMailLabel = new Label();
         eMailLabel.setText("E-mail: none");
         eMailLabel.setStyle("-fx-font-size: 20");
 
@@ -139,19 +143,19 @@ public class Scenehandler {
         VBox infoBox = new VBox();
         infoBox.setAlignment(Pos.CENTER);
 
-        Label nameLabel = new Label();
+        nameLabel = new Label();
         nameLabel.setText("Name: "+customer.getFirstName()+" "+customer.getLastName());
         nameLabel.setStyle("-fx-font-size: 20");
 
-        Label phoneNumLabel = new Label();
+        phoneNumLabel = new Label();
         phoneNumLabel.setText("PhoneNum: "+customer.getPhoneNum());
         phoneNumLabel.setStyle("-fx-font-size: 20");
 
-        Label addressLabel = new Label();
+        addressLabel = new Label();
         addressLabel.setText("Address: "+customer.getAddress());
         addressLabel.setStyle("-fx-font-size: 20");
 
-        Label eMailLabel = new Label();
+        eMailLabel = new Label();
         eMailLabel.setText("E-mail: "+customer.geteMail());
         eMailLabel.setStyle("-fx-font-size: 20");
 
@@ -180,7 +184,7 @@ public class Scenehandler {
         amountWeeksCol.setPrefWidth(80);
         vehicleCol.setPrefWidth(105);
         insurancePackageCol.setPrefWidth(80);
-        startWeekCol.setSortType(TableColumn.SortType.DESCENDING);
+        startWeekCol.setSortType(TableColumn.SortType.ASCENDING);
         contentView.getColumns().addAll(startWeekCol, amountWeeksCol, vehicleCol, insurancePackageCol);
 
 
@@ -211,7 +215,8 @@ public class Scenehandler {
 
         tableInfoTexts.getChildren().addAll(tripsDiscountLabel);
 
-
+        // The tableView uses the rule from before
+        contentView.getSortOrder().addAll(startWeekCol);
 
         root.getChildren().addAll(phoneNumField,seperatorH(10),infoBox,seperatorH(10),contentView,seperatorH(10),tableInfoTexts);
 
@@ -259,9 +264,9 @@ public class Scenehandler {
         for (int i = 1; i <= amountOfWeeks; i++) {
 
             if (weeksOccupied.contains(i)){
-                overview.addColumn(i-(repeat*amountOfWeeks/2),standardButton(i,true));
+                overview.addColumn(i-(repeat*amountOfWeeks/2),standardButton(i,true,camper));
             } else {
-                overview.addColumn(i-(repeat*amountOfWeeks/2),standardButton(i,false));
+                overview.addColumn(i-(repeat*amountOfWeeks/2),standardButton(i,false,camper));
             }
 
             if (i%(amountOfWeeks/2) == 0 && i!=0){
@@ -297,7 +302,7 @@ public class Scenehandler {
         return separator;
     }
 
-    private static Button standardButton(int numberOnWeek, boolean occupied){
+    private static Button standardButton(int numberOnWeek, boolean occupied, Camper camper){
 
         Button standardButton = new Button();
         standardButton.setText(""+numberOnWeek);
@@ -309,6 +314,9 @@ public class Scenehandler {
         } else {
             standardButton.setStyle("-fx-background-color: #CAEEC2");
         }
+
+        // Add function to the button
+        Controller.createNewReservation(standardButton,phoneNumLabel.getText(),camper.getLicensePlate(),""+numberOnWeek);
 
         return standardButton;
     }

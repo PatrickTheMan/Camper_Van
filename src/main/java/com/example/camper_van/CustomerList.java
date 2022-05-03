@@ -74,10 +74,10 @@ class Customer {
 
         reservations = new ArrayList();
 
-        for (int i = 0; i < 5; i++) {
-            reservations.add(new Reservation(0,12,2,"99999999","TestVehicle",1));
-        }
-        reservations.add(new Reservation(0,11,1,"99999999","TestVehicle",1));
+        // SKAL FJERNES
+        reservations.add(new Reservation(0,13,2,"99999999","TestVehicle",1));
+        reservations.add(new Reservation(0,11,1,"99999999","TestVehicle",2));
+        reservations.add(new Reservation(0,18,4,"99999999","TestVehicle",1));
 
     }
 

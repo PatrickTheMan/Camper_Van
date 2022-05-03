@@ -16,15 +16,6 @@ public class DB {
     }
 
     /**
-     *  get a specific camper
-     * @return the license plate num
-     */
-    public static String getCamper(){
-
-        return "";
-    }
-
-    /**
      *  get all the campers
      * @return
      */

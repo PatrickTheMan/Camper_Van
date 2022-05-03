@@ -83,7 +83,7 @@ class Camper {
 
         ArrayList<Reservation> reservations = new ArrayList<>();
 
-        // ADD THE RESERVATIONS OF PATRICK
+
         if (this.getLicensePlate().equals("Plate1")){
             for (Reservation r:
                     CustomerList.getInstance().getCustomers().get(0).getReservations()) {
@@ -94,7 +94,7 @@ class Camper {
 
         for (Reservation r:
                 reservations) {
-            for (int i = r.getRentalStart(); i <= r.getRentalStart()+r.getRentalWeeks(); i++) {
+            for (int i = r.getRentalStart(); i < r.getRentalStart()+r.getRentalWeeks(); i++) {
                 weeksOccupied.add(i);
             }
         }
