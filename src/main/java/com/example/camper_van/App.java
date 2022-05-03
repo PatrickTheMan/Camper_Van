@@ -102,7 +102,7 @@ class Controller {
         return textField;
     }
 
-    public static TextField searchPhoneNumber(ArrayList<Customer> customers, TextField textField, boolean reservationActive){
+    public static TextField searchPhoneNumber(ArrayList<Customer> customers, TextField textField, Camper camper, String weekStart){
 
         System.out.println("Functions been Added");
 
@@ -127,14 +127,22 @@ class Controller {
 
                 if (customer == null){
                     System.out.println("Customer doesn't exist");
-                    textField.setText("");
-                    PopUp.popText("User Not Found", "#FF6961", "25", App.stage);
+                    //textField.setText("");
+                    PopUp.popText("User Not Found", "#FF6961", "25", dialog);
+
                     return;
                 } else {
 
-                    PopUp.popText("User Found", "White", "25", App.stage);
+                    PopUp.popText("User Found", "White", "25", dialog);
 
-                    // DO STUFF
+                    textFieldMail.setText(customer.geteMail());
+                    textFieldName.setText(customer.getFirstName()+" "+customer.getLastName());
+
+                    selectedCustomer=customer;
+
+                    textField.setDisable(true);
+                    textFieldName.setDisable(true);
+                    textFieldMail.setDisable(true);
 
                 }
             }
@@ -147,19 +155,18 @@ class Controller {
     public static Button createNewReservation(Button button,Customer customer, Camper camper, String weekStart){
 
         button.setOnAction(actionEvent -> {
-
-            System.out.println("Phonenum: "+customer.getPhoneNum());
-
-            if (!customer.getPhoneNum().equals("PhoneNum: None")){
-                //System.out.println(phoneNum+" / "+licensePlate+" / "+weekStart);
-                makeReservationStage(customer,camper,weekStart);
-            }
-
-
+            makeReservationStage(customer,camper,weekStart);
         });
 
         return button;
     }
+
+
+    private static Stage dialog;
+    private static Customer selectedCustomer;
+
+    private static TextField textFieldMail;
+    private static TextField textFieldName;
 
     private static void makeReservationStage(Customer customer, Camper camper, String weekStart){
 
@@ -167,7 +174,7 @@ class Controller {
         final double dialogHeight = 450;
 
 
-        Stage dialog = new Stage();
+        dialog = new Stage();
 
         dialog.setResizable(false);
         dialog.setTitle("New booking");
@@ -236,17 +243,18 @@ class Controller {
         textFieldPhone.setMaxWidth(Double.MAX_VALUE);
         gridPane.add(textFieldPhone, 1, 0);
 
-        TextField textFieldMail = new TextField();
+        textFieldMail = new TextField();
         textFieldMail.setMaxWidth(Double.MAX_VALUE);
         gridPane.add(textFieldMail, 1, 1);
 
-        TextField textFieldName = new TextField();
+        textFieldName = new TextField();
         textFieldName.setMaxWidth(Double.MAX_VALUE);
         gridPane.add(textFieldName, 1, 2);
 
         TextField textFieldWeek = new TextField();
         textFieldWeek.setText(weekStart);
         textFieldWeek.setMaxWidth(Double.MAX_VALUE);
+        textFieldWeek.setDisable(true);
         gridPane.add(textFieldWeek, 1, 3);
 
         // The amount of weeks you want combobox container
@@ -268,13 +276,14 @@ class Controller {
         TextField textFieldLicensePlate = new TextField(weekStart);
         textFieldLicensePlate.setText(camper.getLicensePlate());
         textFieldLicensePlate.setMaxWidth(Double.MAX_VALUE);
+        textFieldLicensePlate.setDisable(true);
         gridPane.add(textFieldLicensePlate, 1, 5);
 
         TextArea comments = new TextArea();
         comments.setMaxWidth(Double.MAX_VALUE);
         gridPane.add(comments, 1, 6);
 
-        Controller.searchPhoneNumber(CustomerList.getInstance().getCustomers(), textFieldPhone,true);
+        Controller.searchPhoneNumber(CustomerList.getInstance().getCustomers(), textFieldPhone,camper,weekStart);
 
         // Add ToolBar to Bottom of Dialog
         ToolBar toolBar = new ToolBar();
@@ -295,25 +304,31 @@ class Controller {
 
             // MAKE RESERVATION IF EVERYTHING IS FILLED
 
+            Scenehandler.getInstance().getMainScene(selectedCustomer);
+
         });
 
         // Add cancel button
         Button buttonExit = new Button("Cancel");
         hBoxSaveAndExit.getChildren().add(buttonExit);
         buttonExit.setOnAction(event -> {
+
+            Scenehandler.getInstance().getMainScene(selectedCustomer);
+
             dialog.close();
         });
 
 
         // If customer known then everything gets filled out
         if (customer!=null){
+            selectedCustomer=customer;
             textFieldName.setText(customer.getFirstName()+" "+customer.getLastName());
+            textFieldName.setDisable(true);
             textFieldMail.setText(customer.geteMail());
+            textFieldMail.setDisable(true);
             textFieldPhone.setText(customer.getPhoneNum());
+            textFieldPhone.setDisable(true);
         }
-
-
-
 
 
         // Initialize Window
