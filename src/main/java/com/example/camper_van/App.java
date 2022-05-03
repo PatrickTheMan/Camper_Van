@@ -227,7 +227,6 @@ class Controller {
         Label labelCamper = new Label("Camper License Plate:");
         Label labelWeekStart = new Label("WeekStart:");
         Label labelWeekAmount = new Label("WeekAmount:");
-        Label labelNotes = new Label("Notes:");
 
         // Adding Labels to GridPane
         gridPane.add(labelPhone, 0, 0);
@@ -236,7 +235,6 @@ class Controller {
         gridPane.add(labelWeekStart, 0, 3);
         gridPane.add(labelWeekAmount, 0, 4);
         gridPane.add(labelCamper, 0, 5);
-        gridPane.add(labelNotes, 0, 6);
 
 
         TextField textFieldPhone = new TextField();
@@ -270,6 +268,7 @@ class Controller {
             choiceWeekAmount.getItems().add(i-Integer.parseInt(weekStart)+1);
 
         }
+        choiceWeekAmount.setVisibleRowCount(5);
         gridPane.add(choiceWeekAmount, 1, 4);
 
 
@@ -278,10 +277,6 @@ class Controller {
         textFieldLicensePlate.setMaxWidth(Double.MAX_VALUE);
         textFieldLicensePlate.setDisable(true);
         gridPane.add(textFieldLicensePlate, 1, 5);
-
-        TextArea comments = new TextArea();
-        comments.setMaxWidth(Double.MAX_VALUE);
-        gridPane.add(comments, 1, 6);
 
         Controller.searchPhoneNumber(CustomerList.getInstance().getCustomers(), textFieldPhone,camper,weekStart);
 
