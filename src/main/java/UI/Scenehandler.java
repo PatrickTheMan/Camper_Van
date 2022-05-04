@@ -508,7 +508,7 @@ public class Scenehandler {
         // Add Save Button (saves to DB)
         buttonSaveAndExit = new Button("Save and exit!");
         hBoxSaveAndExit.getChildren().add(buttonSaveAndExit);
-        Controller.saveAndExitReservation(buttonSaveAndExit,Integer.parseInt(weekStart),choiceWeekAmount,dialog);
+        Controller.saveAndExitReservation(buttonSaveAndExit,Integer.parseInt(weekStart),choiceWeekAmount);
 
         // Add cancel button
         Button buttonExit = new Button("Cancel");

@@ -132,7 +132,7 @@ public class Controller {
         });
     }
 
-    public static void saveAndExitReservation(Button button,int weekStart, ComboBox comboBox, Stage stage) {
+    public static void saveAndExitReservation(Button button,int weekStart, ComboBox comboBox) {
 
         // On button click, call this method
         button.setOnAction(actionEvent -> {
@@ -144,7 +144,7 @@ public class Controller {
                     Scenehandler.getInstance().textFieldLicensePlate.getText());
 
             // Close small window
-            stage.close();
+            Scenehandler.getInstance().dialog.close();
 
             // Update the customers reservations
             selectedCustomer.updateReservations();
@@ -153,7 +153,7 @@ public class Controller {
             Scenehandler.getInstance().getMainScene(selectedCustomer);
 
             // Show it worked
-            PopUp.popText("Reservation\nMade", "White", "25", Scenehandler.getInstance().dialog);
+            PopUp.popText("Reservation\nMade", "White", "25", App.stage);
 
         });
 
