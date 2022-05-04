@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -209,7 +210,7 @@ public class Scenehandler {
 
         // Load the reservations and show them in the tableview
         for (Reservation r:
-             customer.getReservations()) {
+                customer.getReservations()) {
             contentView.getItems().addAll(r);
             reservationAmount++;
         }
@@ -221,7 +222,7 @@ public class Scenehandler {
         int discountAmount = 0;
 
         if (reservationAmount>5){
-             discountAmount = 10;
+            discountAmount = 10;
         } else if (reservationAmount>2){
             discountAmount = 5;
         }
@@ -272,7 +273,33 @@ public class Scenehandler {
         ArrayList<Integer> weeksOccupied = camper.getWeeksOccupied();
         ArrayList<Integer> weeksSeason = Season.getInstance().getSeason();
 
-        Button camperNumButton = Scenehandler.getInstance().hoverOverButton(camper.getLicensePlate()+":\n("+camper.getPriceCategory()+")");
+        // Custom popup which differentiates from the others which is why we don't use the class
+        Popup popup = new Popup();
+
+        Label label = new Label(camper.getLicensePlate() + "\n\n" +
+                "Category: \t" + camper.getPriceCategory() + "\n" +
+                "Price: \t\t" + camper.getPrice() + "\n" +
+                "Brand: \t\t" + camper.getBrand() + "\n" +
+                "Model: \t\t" + camper.getModel() + "\n" +
+                "Area: \t\t" + camper.getArea() + "\n" +
+                "Seats: \t\t" + camper.getSeats() + "\n" +
+                "Weight: \t\t" + camper.getWeight());
+
+        label.setStyle("-fx-background-color: white;"
+                + " -fx-text-fill: Black;"
+                + " -fx-font-size: 18;"
+                + " -fx-padding: 10px;"
+                + " -fx-background-radius: 6;");
+
+        popup.getContent().add(label);
+
+        Button camperNumButton = Scenehandler.getInstance().hoverOverButton(camper.getLicensePlate()+":");
+        camperNumButton.setOnMouseEntered(mouseEvent -> {
+            popup.show(App.stage);
+
+        });
+
+        camperNumButton.setOnMouseExited(mouseEvent -> popup.hide());
 
         GridPane overview = new GridPane();
         overview.setTranslateX(xTranslate);
