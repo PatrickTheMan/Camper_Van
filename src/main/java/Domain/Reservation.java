@@ -1,25 +1,19 @@
-package com.example.camper_van;
+package Domain;
 
 public class Reservation {
 
-    private int id;
     private int rentalStart;
     private int rentalWeeks;
     private String customerPhone;
     private String vehicle;
     private int insurancePackage;
 
-    public Reservation(int id, int rentalStart, int rentalWeeks, String customerPhone, String vehicle, int insurancePackage){
-        this.id = id;
+    public Reservation(int rentalStart, int rentalWeeks, String customerPhone, String vehicle, int insurancePackage){
         this.rentalStart = rentalStart;
         this.rentalWeeks = rentalWeeks;
         this.customerPhone = customerPhone;
         this.vehicle = vehicle;
         this.insurancePackage = insurancePackage;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public int getRentalStart() {

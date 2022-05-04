@@ -1,4 +1,4 @@
-package com.example.camper_van;
+package UI;
 
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Label;

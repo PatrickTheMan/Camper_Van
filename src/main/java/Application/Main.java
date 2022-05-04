@@ -1,4 +1,10 @@
-package com.example.camper_van;
+package Application;
+
+import Domain.Fleet;
+import Foundation.DB;
+import Foundation.DBConnection;
+import UI.App;
+import Domain.CustomerList;
 
 public class Main{
 
@@ -9,10 +15,7 @@ public class Main{
 
     public static void main(String[] args) {
 
-        CustomerList.getInstance().getCustomers().get(0).getReservations().get(0);
-
         App.run();
-
 
     }
 }
