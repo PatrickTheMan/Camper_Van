@@ -28,13 +28,15 @@ public class DBConnection {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=AUTOCAMPER", "Patrick", "123456");
-            System.out.println("Connected to " + con.getCatalog());
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println(e.getMessage());
         }
     }
 
-
+    /**
+     * Checks if there is a connection
+     * @return true if there is a connection
+     */
     public static boolean isConnected() {
         if (con != null) {
             return true;

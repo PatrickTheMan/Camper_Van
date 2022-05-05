@@ -8,6 +8,13 @@ import javafx.util.Duration;
 
 public class PopUp {
 
+    /**
+     * Makes a popup window that lasts for 1 sec
+     * @param text that is going to be showed
+     * @param color of the background
+     * @param size of the text
+     * @param stage the popup will be on top of
+     */
     public static void popText(String text, String color, String size, Stage stage) {
         try {
             Popup popup = new Popup();
@@ -15,7 +22,7 @@ public class PopUp {
             popup.setAutoFix(true);
             Label popupLabel = new Label(text);
             popupLabel.setStyle("-fx-background-color: "+color+";"
-                    + " -fx-text-fill: Black;"
+                    + " -fx-text-fill: White;"
                     + " -fx-font-size: " + size + ";"
                     + " -fx-padding: 10px;"
                     + " -fx-background-radius: 6;");

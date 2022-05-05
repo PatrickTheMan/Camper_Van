@@ -28,14 +28,22 @@ public class Camper {
         this.price = price;
     }
 
+    /**
+     * Gets the weeks occupied
+     * @return the weeks occupied
+     */
     public ArrayList<Integer> getWeeksOccupied() {
 
-        setWeeksOccupied();
+        // Set the weeks occupied before returning
+        updateWeeksOccupied();
 
         return weeksOccupied;
     }
 
-    private void setWeeksOccupied() {
+    /**
+     * Updates the weeks occupied Integer Arraylist via DB
+     */
+    private void updateWeeksOccupied() {
 
         // Get the reservation information from the db via the licenseplate
         weeksOccupied = DB.getReservationLicense(this.licensePlate);

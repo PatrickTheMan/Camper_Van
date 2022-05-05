@@ -28,13 +28,11 @@ public class DB {
      */
     public static void makeDBReservation(int weekStart, int weekAmount, String phoneNum, String licensePlate){
 
-        System.out.println("RESERVED");
-
         try {
-            // reads the stored procedure to find all available weeks
+            // Makes prepared statement with the given reservation details and stored procedure
             PreparedStatement ps = DBConnection.getInstance().prepareStatement(
                     "exec [dbo].[makeReservation] "+weekStart+","+weekAmount+",'"+phoneNum+"','"+licensePlate+"',0");
-            // executes the stored procedure
+            // Executes the stored procedure
             ps.executeUpdate();
         }catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -50,13 +48,15 @@ public class DB {
         ArrayList<Camper> campers = new ArrayList();
 
         try {
-            // reads the stored procedure to find all available weeks
+            // Makes a prepared statement with the stored procedure
             PreparedStatement ps = DBConnection.getInstance().prepareStatement("exec [dbo].[getCamper]");
-            // executes the stored procedure until no data has been found
+            // Executes the stored procedure until no data has been found
             ResultSet rs = ps.executeQuery();
 
+            // Add a camper at a time
             while (rs.next()){
 
+                // Adding camper
                 campers.add(new Camper(
                         cutString(rs.getString(1)),
                         cutString(rs.getString(2)),
@@ -87,13 +87,15 @@ public class DB {
         ArrayList<Customer> customers = new ArrayList();
 
         try {
-            // reads the stored procedure to find all available weeks
+            // Makes a prepared statement with the stored procedure
             PreparedStatement ps = DBConnection.getInstance().prepareStatement("exec [dbo].[getCustomer]");
-            // executes the stored procedure until no data has been found
+            // Executes the stored procedure until no data has been found
             ResultSet rs = ps.executeQuery();
 
+            // Add each customer
             while (rs.next()){
 
+                // Add customer
                 customers.add(new Customer(
                         cutString(rs.getString(1)),
                         cutString(rs.getString(2)),
@@ -122,16 +124,19 @@ public class DB {
         ArrayList<Integer> occupiedWeeks = new ArrayList();
 
         try {
-            // reads the stored procedure to find all available weeks
+            // Makes a prepared statement with the information and the stored procedure
             PreparedStatement ps = DBConnection.getInstance().prepareStatement("exec [dbo].[getReservationsLicense] '"+licensePlate+"'");
-            // executes the stored procedure until no data has been found
+            // Executes the stored procedure until no data has been found
             ResultSet rs = ps.executeQuery();
 
+            // Adds the reservations
             while (rs.next()){
 
+                // Gets the start week and week amount
                 int weekStart = rs.getInt(2);
                 int weekAmount = rs.getInt(3);
 
+                // Add the weeks one by one
                 for (int i = weekStart; i < weekStart+weekAmount; i++) {
                     occupiedWeeks.add(i);
                 }
@@ -156,13 +161,15 @@ public class DB {
         ArrayList<Reservation> reservations = new ArrayList();
 
         try {
-            // reads the stored procedure to find all available weeks
+            // Makes a prepared statement with the information and the stored procedure
             PreparedStatement ps = DBConnection.getInstance().prepareStatement("exec [dbo].[getReservationsPhone] '"+phoneNum+"'");
-            // executes the stored procedure until no data has been found
+            // Executes the stored procedure until no data has been found
             ResultSet rs = ps.executeQuery();
 
+            // Adds the reservations
             while (rs.next()){
 
+                // Add reservation
                 reservations.add(new Reservation(
                     rs.getInt(2),
                     rs.getInt(3),
@@ -190,6 +197,7 @@ public class DB {
 
         char c;
 
+        // Cut the string when there is a SPACE and return it
         for (int i = 0; i < s.length(); i++) {
 
             c = s.charAt(i);

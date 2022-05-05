@@ -9,20 +9,33 @@ public class Fleet {
     private static Fleet fleet=null;
     private ArrayList<Domain.Camper> campers;
 
+    /**
+     * Get the Fleet singleton
+     * @return the instance
+     */
     public static Fleet getInstance(){
 
         if (fleet==null){
             fleet = new Fleet();
-            fleet.setCampers();
+            fleet.updateCampers();
         }
 
         return fleet;
     }
 
+    /**
+     * Gets all the campers
+     * @return the campers
+     */
     public ArrayList<Domain.Camper> getCampers(){
         return campers;
     }
 
+    /**
+     * Gets a specific camper
+     * @param licensePlate to that camper
+     * @return the specific camper
+     */
     public Camper getCamper(String licensePlate){
         for (Camper c:
              campers) {
@@ -33,7 +46,10 @@ public class Fleet {
         return null;
     }
 
-    private void setCampers(){
+    /**
+     * Updates the campers via DB
+     */
+    private void updateCampers(){
 
         if (campers==null){
             campers = new ArrayList<>();

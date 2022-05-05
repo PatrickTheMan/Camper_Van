@@ -60,7 +60,7 @@ public class Testing {
         DBConnection.getInstance();
 
         //Testing a EQ (Equivalense portition)
-        System.out.println("This will return true");
+        System.out.println("This will return true if there is a connection");
         boolean actual = DBConnection.isConnected();
         assertEquals(true,actual);
     }

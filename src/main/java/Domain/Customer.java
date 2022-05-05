@@ -24,10 +24,20 @@ public class Customer {
         updateReservations();
     }
 
+    /**
+     * Gets the reservations
+     * @return the reservations in an Arraylist
+     */
     public ArrayList<Reservation> getReservations() {
+
+        // Updates the reservations before
+        updateReservations();
         return reservations;
     }
 
+    /**
+     * Updates the reservations via DB
+     */
     public void updateReservations() {
 
         // Get the reservations via phonenumber from the db

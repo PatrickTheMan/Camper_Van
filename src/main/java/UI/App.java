@@ -1,14 +1,11 @@
 package UI;
 
 import Foundation.DBConnection;
-import UI.Scenehandler;
-import com.example.camper_van.*;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 public class App extends Application {
@@ -23,10 +20,7 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
-
-        // Make a DB connection
-        //DBConnection.getInstance();
+    public void start(Stage stage) {
 
         // Starting procedures and Set the Scene
         this.stage = stage;

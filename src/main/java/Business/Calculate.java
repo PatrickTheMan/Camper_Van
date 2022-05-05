@@ -8,6 +8,14 @@ import java.util.ArrayList;
 
 public class Calculate {
 
+    /**
+     * Calculates the price based on the camper, customer, weekAmount and weekStart (also lookes at season and customer discount)
+     * @param camper the reservated camper
+     * @param customer the customer that wants to reservate
+     * @param weekAmount the weekAmount wished to reservate
+     * @param weekStart the wekkStart wished to reservate
+     * @return the price as a double
+     */
     public static double camperPrice(Camper camper, Customer customer, int weekAmount, int weekStart) {
 
         double price = 0;
@@ -30,13 +38,10 @@ public class Calculate {
         if (customer != null) {
             if (customer.getReservations().size() > 5) {// Get the amount of tripes
                 price = price * 0.9;
-                System.out.println("10% off");
             } else if (customer.getReservations().size() > 2) {
                 price = price * 0.95;
-                System.out.println("5% off");
             }
         }
-
 
         return price;
     }

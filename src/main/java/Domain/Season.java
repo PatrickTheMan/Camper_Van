@@ -7,21 +7,32 @@ public class Season {
     private static Season season=null;
     private ArrayList<Integer> seasonWeeks;
 
+    /**
+     * Gets the Season singleton
+     * @return the instance
+     */
     public static Season getInstance(){
 
         if (season==null){
             season = new Season();
-            season.setSeason();
+            season.updateSeason();
         }
 
         return season;
     }
 
+    /**
+     * Gets all the season weeks
+     * @return the season weeks
+     */
     public ArrayList<Integer> getSeason(){
         return seasonWeeks;
     }
 
-    private void setSeason(){
+    /**
+     * Updates the seasons
+     */
+    private void updateSeason(){
 
         if (seasonWeeks==null){
             seasonWeeks = new ArrayList<>();
@@ -29,7 +40,7 @@ public class Season {
             seasonWeeks.clear();
         }
 
-        // ADD SEASONS
+        // ADD SEASONS (HardCoded but can be made with DB)
         for (int i = 23; i < 30; i++) {
             seasonWeeks.add(i);
         }
